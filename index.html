@@ -1,456 +1,682 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PS99 Restock Bot</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0d0a1f;
-    --surface: #171233;
-    --surface-2: #1f1a42;
-    --line: #332b5e;
-    --pink: #ff6ec7;
-    --purple: #8a6bff;
-    --cyan: #3ce8e8;
-    --gradient: linear-gradient(135deg, var(--pink), var(--purple), var(--cyan));
-    --text: #f3efff;
-    --text-muted: #9a90c2;
-    --mono: 'IBM Plex Mono', ui-monospace, monospace;
-    --display: 'Baloo 2', sans-serif;
-    --body: 'Inter', sans-serif;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Simulator 99 · Complete Image Gallery</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  * { box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #0a0e1a 0%, #141b2d 100%);
+      color: #eef4ff;
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
 
-  body {
-    margin: 0;
-    background:
-      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(138, 107, 255, 0.35), transparent),
-      radial-gradient(ellipse 700px 500px at 110% 10%, rgba(60, 232, 232, 0.18), transparent),
-      var(--bg);
-    color: var(--text);
-    font-family: var(--body);
-    line-height: 1.55;
-  }
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
 
-  a { color: inherit; }
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
 
-  .wrap {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+    header h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #f9d56e, #ff9f4b, #ff6b6b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 40px rgba(255, 159, 75, 0.3);
+      margin-bottom: 0.5rem;
+    }
 
-  /* ---------- HERO ---------- */
+    header p {
+      font-size: 1.15rem;
+      color: #a0b4d0;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
 
-  .hero {
-    padding: 88px 0 64px;
-    border-bottom: 1px solid var(--line);
-  }
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
 
-  .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--bg);
-    background: var(--gradient);
-    padding: 6px 14px;
-    border-radius: 999px;
-    margin-bottom: 28px;
-    font-weight: 600;
-  }
+    .stat {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 0.6rem 1.4rem;
+      border-radius: 100px;
+      font-size: 0.95rem;
+      color: #cddcf0;
+      backdrop-filter: blur(6px);
+    }
 
-  h1 {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: clamp(36px, 6vw, 54px);
-    line-height: 1.05;
-    margin: 0 0 20px;
-  }
+    .stat strong {
+      color: #f9d56e;
+      font-weight: 700;
+    }
 
-  h1 .grad {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+    /* Search & Filter */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      align-items: center;
+    }
 
-  .sub {
-    font-size: 17px;
-    color: var(--text-muted);
-    max-width: 46ch;
-    margin: 0 0 40px;
-  }
+    .search-box {
+      flex: 1 1 340px;
+      max-width: 480px;
+      position: relative;
+    }
 
-  /* ---------- READOUT CARD (signature element) ---------- */
+    .search-box input {
+      width: 100%;
+      padding: 0.9rem 1.2rem 0.9rem 3rem;
+      border-radius: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: #eef4ff;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.25s;
+      backdrop-filter: blur(8px);
+    }
 
-  .activity {
-    display: inline-block;
-    padding: 2px;
-    border-radius: 18px;
-    background: var(--gradient);
-    margin-bottom: 44px;
-  }
+    .search-box input:focus {
+      border-color: #f9d56e;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 0 4px rgba(249, 213, 110, 0.15);
+    }
 
-  .activity-inner {
-    background: var(--surface);
-    border-radius: 16px;
-    padding: 20px 26px;
-    min-width: 300px;
-  }
+    .search-box input::placeholder {
+      color: #8196b4;
+    }
 
-  .activity-line {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    font-family: var(--mono);
-    font-size: 13px;
-    padding: 4px 0;
-  }
+    .search-box svg {
+      position: absolute;
+      left: 1.1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      fill: #8196b4;
+      pointer-events: none;
+    }
 
-  .activity-check {
-    color: var(--cyan);
-    font-weight: 600;
-  }
+    .filter-buttons {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-  .activity-text {
-    color: var(--text-muted);
-  }
+    .filter-btn {
+      padding: 0.65rem 1.3rem;
+      border-radius: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+      color: #b8cbe4;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      backdrop-filter: blur(6px);
+    }
 
-  .activity-text b {
-    color: var(--text);
-    font-weight: 500;
-  }
+    .filter-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
 
-  .activity-line:last-child .activity-text b {
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+    .filter-btn.active {
+      background: linear-gradient(135deg, #f9d56e, #ff9f4b);
+      border-color: transparent;
+      color: #0a0e1a;
+      font-weight: 700;
+      box-shadow: 0 4px 20px rgba(249, 213, 110, 0.3);
+    }
 
-  .cta-row {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
+    /* Gallery Grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+      gap: 1.4rem;
+    }
 
-  .btn {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 15px;
-    text-decoration: none;
-    padding: 14px 28px;
-    border-radius: 999px;
-    display: inline-block;
-  }
+    .pet-card {
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 20px;
+      padding: 1.2rem 0.8rem 0.9rem;
+      text-align: center;
+      transition: 0.3s cubic-bezier(0.2, 0.8, 0.3, 1);
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.5s ease both;
+    }
 
-  .btn-primary {
-    background: var(--gradient);
-    color: var(--bg);
-    box-shadow: 0 0 32px rgba(138, 107, 255, 0.45);
-  }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-  .btn-secondary {
-    border: 1.5px solid var(--line);
-    color: var(--text);
-  }
+    .pet-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(249, 213, 110, 0.35);
+      box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(249, 213, 110, 0.15);
+    }
 
-  .fine {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 18px;
-  }
+    .pet-card img {
+      width: 100%;
+      height: 130px;
+      object-fit: contain;
+      image-rendering: auto;
+      transition: 0.3s;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+    }
 
-  /* ---------- REQUIREMENTS ---------- */
+    .pet-card:hover img {
+      transform: scale(1.06);
+    }
 
-  .reqs {
-    padding: 52px 0;
-    border-bottom: 1px solid var(--line);
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
+    .pet-card .name {
+      margin-top: 0.7rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #d6e4f5;
+      line-height: 1.3;
+      word-break: break-word;
+    }
 
-  @media (max-width: 640px) {
-    .reqs { grid-template-columns: 1fr; }
-  }
+    .pet-card .tag {
+      display: inline-block;
+      margin-top: 0.35rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: 100px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #9fb6d4;
+    }
 
-  .req {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 20px;
-  }
+    /* Skeleton loading */
+    .skeleton .pet-card {
+      pointer-events: none;
+    }
+    .skeleton .pet-card img {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+    }
+    .skeleton .pet-card .name {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      height: 14px;
+      width: 70%;
+      margin: 0.7rem auto 0;
+      color: transparent;
+    }
 
-  .req h3 {
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 15px;
-    margin: 0 0 8px;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+    /* Footer */
+    footer {
+      margin-top: 3.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #6a80a0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 2rem;
+      line-height: 1.7;
+    }
 
-  .req p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--text-muted);
-  }
+    footer a {
+      color: #f9d56e;
+      text-decoration: none;
+      font-weight: 500;
+    }
 
-  /* ---------- STEPS ---------- */
+    footer a:hover {
+      text-decoration: underline;
+    }
 
-  .steps {
-    padding: 60px 0;
-    border-bottom: 1px solid var(--line);
-  }
+    /* No results */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: #8196b4;
+      font-size: 1.1rem;
+    }
 
-  .steps h2 {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 28px;
-    margin: 0 0 32px;
-  }
+    /* Responsive */
+    @media (max-width: 700px) {
+      header h1 { font-size: 2.2rem; }
+      .gallery { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.9rem; }
+      .pet-card img { height: 100px; }
+      .stats-bar { gap: 1rem; }
+      .stat { font-size: 0.8rem; padding: 0.4rem 1rem; }
+    }
 
-  .step {
-    display: flex;
-    gap: 20px;
-    padding: 20px 0;
-    border-top: 1px solid var(--line);
-  }
+    @media (max-width: 420px) {
+      body { padding: 1rem 0.8rem; }
+      header h1 { font-size: 1.8rem; }
+      .gallery { grid-template-columns: repeat(2, 1fr); gap: 0.7rem; }
+      .pet-card { padding: 0.8rem 0.4rem 0.6rem; border-radius: 14px; }
+      .pet-card img { height: 80px; }
+      .pet-card .name { font-size: 0.72rem; }
+    }
 
-  .step:last-child { border-bottom: 1px solid var(--line); }
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 16, 0.88);
+      backdrop-filter: blur(16px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 2rem;
+      cursor: pointer;
+      animation: fadeIn 0.25s ease;
+    }
 
-  .step-n {
-    font-family: var(--display);
-    font-weight: 700;
-    font-size: 15px;
-    padding-top: 2px;
-    min-width: 28px;
-    background: var(--gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
 
-  .step-body h4 {
-    margin: 0 0 6px;
-    font-family: var(--display);
-    font-weight: 600;
-    font-size: 16px;
-  }
+    .lightbox.open {
+      display: flex;
+    }
 
-  .step-body p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--text-muted);
-  }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 75vh;
+      object-fit: contain;
+      border-radius: 20px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 1rem;
+    }
 
-  .step-body code {
-    font-family: var(--mono);
-    background: var(--surface-2);
-    padding: 2px 7px;
-    border-radius: 5px;
-    font-size: 13px;
-    color: var(--cyan);
-  }
+    .lightbox .lb-name {
+      margin-top: 1.2rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #f9d56e;
+      text-align: center;
+    }
 
-  /* ---------- FOOTER ---------- */
+    .lightbox .lb-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.8rem;
+      font-size: 2rem;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
 
-  footer {
-    padding: 44px 0 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  footer .brand {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  footer .links {
-    display: flex;
-    gap: 22px;
-    font-family: var(--mono);
-    font-size: 13px;
-  }
-
-  footer .links a {
-    color: var(--cyan);
-    text-decoration: none;
-  }
-</style>
+    .lightbox .lb-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: rotate(90deg);
+    }
+  </style>
 </head>
 <body>
-
-  <div class="wrap">
-
-    <section class="hero">
-      <div class="eyebrow">★ Secret drop</div>
-
-      <h1>Your booth,<br>on <span class="grad">autopilot</span>.</h1>
-
-      <p class="sub">
-        A Discord-controlled bot for Pet Simulator 99 that prices your
-        Huges off live RAP and Cosmic Value, lists them for you, and
-        refills the booth itself the moment it hits empty.
-      </p>
-
-      <div class="activity">
-        <div class="activity-inner">
-          <div class="activity-line">
-            <span class="activity-check">✓</span>
-            <span class="activity-text">Detected empty booth</span>
-          </div>
-          <div class="activity-line">
-            <span class="activity-check">✓</span>
-            <span class="activity-text">Pulled inventory — <b>6 Huges found</b></span>
-          </div>
-          <div class="activity-line">
-            <span class="activity-check">✓</span>
-            <span class="activity-text">Priced off RAP / Cosmic Value</span>
-          </div>
-          <div class="activity-line">
-            <span class="activity-check">✓</span>
-            <span class="activity-text"><b>Booth refilled — back online</b></span>
-          </div>
-        </div>
+  <div class="container">
+    <header>
+      <h1>🐾 Pet Simulator 99</h1>
+      <p>Browse the complete collection of pets, Huges, Titanics, Gargantuans, and eggs — sourced from the official Pet Simulator Wiki.</p>
+      <div class="stats-bar">
+        <span class="stat">🖼️ <strong id="imageCount">0</strong> images</span>
+        <span class="stat">🐶 <strong id="petCount">0</strong> pets</span>
+        <span class="stat">🥚 <strong id="eggCount">0</strong> eggs</span>
       </div>
+    </header>
 
-      <div class="cta-row">
-        <a id="link-download" class="btn btn-primary" href="#">Download ZIP</a>
-        <a id="link-repo" class="btn btn-secondary" href="#">View on GitHub</a>
+    <!-- Controls -->
+    <div class="controls">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" id="searchInput" placeholder="Search pets, eggs, Huges, Titanics…" autocomplete="off">
       </div>
+      <div class="filter-buttons" id="filterButtons">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="pet">🐾 Pets</button>
+        <button class="filter-btn" data-filter="huge">✨ Huges</button>
+        <button class="filter-btn" data-filter="titanic">👑 Titanics</button>
+        <button class="filter-btn" data-filter="gargantuan">🔥 Gargantuans</button>
+        <button class="filter-btn" data-filter="egg">🥚 Eggs</button>
+      </div>
+    </div>
 
-      <div class="fine">No install script runs on this page — you run it locally, on your own machine.</div>
-    </section>
-
-    <section class="reqs">
-      <div class="req">
-        <h3>OS</h3>
-        <p>Windows 10 or 11. Reads your screen and moves your mouse, so it can't run headless or in the cloud.</p>
-      </div>
-      <div class="req">
-        <h3>Runtime</h3>
-        <p>Python 3.10+. The installer script grabs every package the bot needs on first run.</p>
-      </div>
-      <div class="req">
-        <h3>Accounts</h3>
-        <p>Your own Discord bot application and a BIG Games developer app — both free, both covered below.</p>
-      </div>
-    </section>
-
-    <section class="steps">
-      <h2>Getting it running</h2>
-
-      <div class="step">
-        <div class="step-n">01</div>
-        <div class="step-body">
-          <h4>Download and unzip</h4>
-          <p>Grab the ZIP above, extract it anywhere — a folder on your Desktop is fine.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-n">02</div>
-        <div class="step-body">
-          <h4>Run <code>run.bat</code></h4>
-          <p>Double-click it. First launch installs everything automatically, then asks four setup questions in plain English.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-n">03</div>
-        <div class="step-body">
-          <h4>Follow the full guide once</h4>
-          <p>Creating your Discord bot and BIG Games app takes about ten minutes the first time. <code>README.md</code> in the repo walks through every click.</p>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-n">04</div>
-        <div class="step-body">
-          <h4>Authorize and go</h4>
-          <p>Type <code>/authorize</code> in Discord, approve access, and the status window on your desktop takes it from there.</p>
-        </div>
-      </div>
-    </section>
+    <!-- Gallery -->
+    <div class="gallery" id="gallery"></div>
 
     <footer>
-      <div class="brand">ps99-restock-bot</div>
-      <div class="links">
-        <a id="link-footer-repo" href="#">Repository</a>
-        <a id="link-footer-readme" href="#">Full guide</a>
-        <a id="link-footer-issues" href="#">Issues</a>
-      </div>
+      <p>Pet Simulator 99 image gallery · Data sourced from the <a href="https://pet-simulator.fandom.com" target="_blank" rel="noopener">Pet Simulator Wiki</a></p>
+      <p style="margin-top:0.4rem; font-size:0.78rem; opacity:0.7;">Pet Simulator 99 is a game by BIG Games. All images belong to their respective owners.</p>
     </footer>
+  </div>
 
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lb-close" onclick="closeLightbox()">&times;</div>
+    <img src="" alt="" id="lightboxImg">
+    <div class="lb-name" id="lightboxName"></div>
   </div>
 
   <script>
-    // Every link on this page points at "wherever this page
-    // is currently hosted" instead of a hardcoded username/
-    // repo — figured out from the page's own URL, since
-    // GitHub Pages always serves from
-    // https://<username>.github.io/<repo>/
-    (function () {
-      var host = window.location.hostname; // e.g. simba13231.github.io
-      var path = window.location.pathname; // e.g. /restock-bot-for-ps99/
+    // ============================================================
+    //  DATA — Image filenames from the Pet Simulator Wiki
+    //  Base URL: https://pet-simulator.fandom.com/wiki/Special:FilePath/
+    // ============================================================
 
-      var githubIoSuffix = ".github.io";
+    const WIKI_BASE = 'https://pet-simulator.fandom.com/wiki/Special:FilePath/';
 
-      if (host.indexOf(githubIoSuffix) === -1) {
-        console.warn(
-          "Not being served from a *.github.io domain — " +
-          "can't auto-detect the repo, links left disabled."
-        );
+    // Helper to build image URL
+    function wikiImg(filename) {
+      return WIKI_BASE + encodeURIComponent(filename);
+    }
+
+    // ----------------------------------------------------------
+    //  PETS — Huge, Titanic, Gargantuan, and regular
+    // ----------------------------------------------------------
+    const pets = [
+      // ==================== HUGE PETS ====================
+      { name: 'Huge Rich Cat',          file: 'PS99 Huge Rich Cat.png',          type: 'huge' },
+      { name: 'Huge Bloo Cat',          file: 'PS99 Huge Bloo Cat.png',          type: 'huge' },
+      { name: 'Huge Puurple Cat',       file: 'PS99 Huge Puurple Cat.png',       type: 'huge' },
+      { name: 'Huge Robber Cat',        file: 'PS99 Huge Robber Cat.png',        type: 'huge' },
+      { name: 'Huge Pineapple Monkey',  file: 'PS99 Huge Pineapple Monkey.png',  type: 'huge' },
+      { name: 'Huge Sun Agony',         file: 'PS99 Huge Sun Agony.png',         type: 'huge' },
+      { name: 'Huge Hacker Axolotl',    file: 'PS99 Huge Hacker Axolotl.png',    type: 'huge' },
+      { name: 'Huge Abomination',       file: 'PS99 Huge Abomination.png',       type: 'huge' },
+      { name: 'Huge Cartoon Bunny',     file: 'PS99 Huge Cartoon Bunny.png',     type: 'huge' },
+      { name: 'Huge Cartoon Demon',     file: 'PS99 Huge Cartoon Demon.png',     type: 'huge' },
+      { name: 'Huge Gorgon',            file: 'PS99 Huge Gorgon.png',            type: 'huge' },
+      { name: 'Huge Reversed Cat',      file: 'PS99 Huge Reversed Cat.png',      type: 'huge' },
+      { name: 'Huge Machete Dog',       file: 'PS99 Huge Machete Dog.png',       type: 'huge' },
+      { name: 'Huge Slasher Sloth',     file: 'PS99 Huge Slasher Sloth.png',     type: 'huge' },
+      { name: 'Huge Ghoul Horse',       file: 'PS99 Huge Ghoul Horse.png',       type: 'huge' },
+      { name: 'Huge Dominus Darkwing',  file: 'PS99 Huge Dominus Darkwing.png',  type: 'huge' },
+      { name: 'Huge Little Melty',      file: 'PS99 Huge Little Melty.png',      type: 'huge' },
+      { name: 'Huge Skeleton Cat',      file: 'PS99 Huge Skeleton Cat.png',      type: 'huge' },
+      { name: 'Huge Pumpkin Scarecrow', file: 'PS99 Huge Pumpkin Scarecrow.png', type: 'huge' },
+      { name: 'Huge Plague Dragon',     file: 'PS99 Huge Plague Dragon.png',     type: 'huge' },
+      { name: 'Huge Bejeweled Unicorn', file: 'PS99 Huge Bejeweled Unicorn.png', type: 'huge' },
+      { name: 'Huge Bejeweled Lion',    file: 'PS99 Huge Bejeweled Lion.png',    type: 'huge' },
+      { name: 'Huge Atomic Axolotl',    file: 'PS99 Huge Atomic Axolotl.png',    type: 'huge' },
+      { name: 'Huge Lucki Angelus',     file: 'PS99 Huge Lucki Angelus.png',     type: 'huge' },
+      { name: 'Huge Coconut Flamingo',  file: 'PS99 Huge Coconut Flamingo.png',  type: 'huge' },
+      { name: 'Huge Chill Ducky',       file: 'PS99 Huge Chill Ducky.png',       type: 'huge' },
+      { name: 'Huge Pot of Gold Corgi', file: 'PS99 Huge Pot of Gold Corgi.png', type: 'huge' },
+      { name: 'Huge Leafstorm Wolf',    file: 'PS99 Huge Leafstorm Wolf.png',    type: 'huge' },
+      { name: 'Huge Nutcracker Squirrel', file: 'PS99 Huge Nutcracker Squirrel.png', type: 'huge' },
+      { name: 'Huge Temporal Owl',      file: 'PS99 Huge Temporal Owl.png',      type: 'huge' },
+      { name: 'Huge Holographic Cat',   file: 'PS99 Huge Holographic Cat.png',   type: 'huge' },
+      { name: 'Huge Hi-Tech Tiger',     file: 'PS99 Huge Hi-Tech Tiger.png',     type: 'huge' },
+      { name: 'Huge Hippomelon',        file: 'PS99 Huge Hippomelon.png',        type: 'huge' },
+      { name: 'Huge Holiday Pegasus',   file: 'PS99 Huge Holiday Pegasus.png',   type: 'huge' },
+      { name: 'Huge Hoverboard Cat',    file: 'PS99 Huge Hoverboard Cat.png',    type: 'huge' },
+      { name: 'Huge Husky',             file: 'PS99 Huge Husky.png',             type: 'huge' },
+      { name: 'Huge Jester Dog',        file: 'PS99 Huge Jester Dog.png',        type: 'huge' },
+      { name: 'Huge Mermaid Cat',       file: 'PS99 Huge Mermaid Cat.png',       type: 'huge' },
+      { name: 'Huge Valkyrie Dog',      file: 'PS99 Huge Valkyrie Dog.png',      type: 'huge' },
+      { name: 'Huge White Tiger',       file: 'PS99 Huge White Tiger.png',       type: 'huge' },
+      { name: 'Huge Electric Cat',      file: 'PS99 Huge Electric Cat.png',      type: 'huge' },
+      { name: 'Huge Enoji Cat',         file: 'PS99 Huge Enoji Cat.png',         type: 'huge' },
+      { name: 'Huge Valentines Cat',    file: 'PS99 Huge Valentines Cat.png',    type: 'huge' },
+      { name: 'Huge Kraken',            file: 'PS99 Huge Kraken.png',            type: 'huge' },
+      { name: 'Huge Party Dragon',      file: 'PS99 Huge Party Dragon.png',      type: 'huge' },
+      { name: 'Huge Pixel Shark',       file: 'PS99 Huge Pixel Shark.png',       type: 'huge' },
+      { name: 'Huge Tech Samurai Cat',  file: 'PS99 Huge Tech Samurai Cat.png',  type: 'huge' },
+      { name: 'Huge Jolly Penguin',     file: 'PS99 Huge Jolly Penguin.png',     type: 'huge' },
+      { name: 'Huge Mosaic Lamb',       file: 'PS99 Huge Mosaic Lamb.png',       type: 'huge' },
+      { name: 'Huge Hell Rock',         file: 'PS99 Huge Hell Rock.png',         type: 'huge' },
+      { name: 'Huge Gold Hell Rock',    file: 'PS99 Huge Gold Hell Rock.png',    type: 'huge' },
+      { name: 'Huge Nice Cat',          file: 'PS99 Huge Nice Cat.png',          type: 'huge' },
+      { name: 'Huge Naughty Dominus',   file: 'PS99 Huge Naughty Dominus.png',   type: 'huge' },
+      { name: 'Huge Holiday Bearserker',file: 'PS99 Huge Holiday Bearserker.png',type: 'huge' },
+      { name: 'Huge Snow Elf',          file: 'PS99 Huge Snow Elf.png',          type: 'huge' },
+      { name: 'Huge Sleigh Cat',        file: 'PS99 Huge Sleigh Cat.png',        type: 'huge' },
+      { name: 'Huge Merry Manatee',     file: 'PS99 Huge Merry Manatee.png',     type: 'huge' },
+      { name: 'Huge Vampire Agony',     file: 'PS99 Huge Vampire Agony.png',     type: 'huge' },
+      { name: 'Huge Pumpkin',           file: 'PS99 Huge Pumpkin.png',           type: 'huge' },
+      { name: 'Huge Maple Owl',         file: 'PS99 Huge Maple Owl.png',         type: 'huge' },
+      { name: 'Huge Ghostly Wolf',      file: 'PS99 Huge Ghostly Wolf.png',      type: 'huge' },
+      { name: 'Huge Wolf',              file: 'PS99 Huge Wolf.png',              type: 'huge' },
+      { name: 'Huge Honey Bear',        file: 'PS99 Huge Honey Bear.png',        type: 'huge' },
+
+      // ==================== TITANIC PETS ====================
+      { name: 'Titanic Midnight Lion',       file: 'PS99 Titanic Midnight Lion.png',       type: 'titanic' },
+      { name: 'Titanic Snowflake Dominus',   file: 'PS99 Titanic Snowflake Dominus.png',   type: 'titanic' },
+      { name: 'Titanic Snow Globe Cat',      file: 'PS99 Titanic Snow Globe Cat.png',      type: 'titanic' },
+      { name: 'Titanic Party Crown Corgi',   file: 'PS99 Titanic Party Crown Corgi.png',   type: 'titanic' },
+      { name: 'Titanic Hypnotic Monkey',     file: 'PS99 Titanic Hypnotic Monkey.png',     type: 'titanic' },
+      { name: 'Titanic Parrot',              file: 'PS99 Titanic Parrot.png',              type: 'titanic' },
+      { name: 'Titanic Pixel Dominus Astra', file: 'PS99 Titanic Pixel Dominus Astra.png', type: 'titanic' },
+      { name: 'Titanic Narwhal',             file: 'PS99 Titanic Narwhal.png',             type: 'titanic' },
+      { name: 'Titanic Arcane Void Cat',     file: 'PS99 Titanic Arcane Void Cat.png',     type: 'titanic' },
+      { name: 'Titanic Easter Golem',        file: 'PS99 Titanic Easter Golem.png',        type: 'titanic' },
+      { name: 'Titanic Jolly Cat',           file: 'PS99 Titanic Jolly Cat.png',           type: 'titanic' },
+      { name: 'Titanic Ghostly Wolf',        file: 'PS99 Titanic Ghostly Wolf.png',        type: 'titanic' },
+
+      // ==================== GARGANTUAN PETS ====================
+      { name: 'Gargantuan Santa Paws',          file: 'PS99 Gargantuan Santa Paws.png',          type: 'gargantuan' },
+      { name: 'Gargantuan Hypnotic Kitsune',    file: 'PS99 Gargantuan Hypnotic Kitsune.png',    type: 'gargantuan' },
+      { name: 'Gargantuan Googly Agony',        file: 'PS99 Gargantuan Googly Agony.png',        type: 'gargantuan' },
+      { name: 'Gargantuan Matryoshka Bear',     file: 'PS99 Gargantuan Matryoshka Bear.png',     type: 'gargantuan' },
+      { name: 'Gargantuan Jurassic Dragon',     file: 'PS99 Gargantuan Jurassic Dragon.png',     type: 'gargantuan' },
+      { name: 'Gargantuan Grim Reaper',         file: 'PS99 Gargantuan Grim Reaper.png',         type: 'gargantuan' },
+      { name: 'Gargantuan Dot Matrix Pegasus',  file: 'PS99 Gargantuan Dot Matrix Pegasus.png',  type: 'gargantuan' },
+      { name: 'Gargantuan Bloom Dominus',       file: 'PS99 Gargantuan Bloom Dominus.png',       type: 'gargantuan' },
+    ];
+
+    // ----------------------------------------------------------
+    //  EGGS
+    // ----------------------------------------------------------
+    const eggs = [
+      { name: 'Cracked Egg',          file: 'PS99 Cracked Egg.png',          type: 'egg' },
+      { name: 'Spotted Egg',          file: 'PS99 Spotted Egg.png',          type: 'egg' },
+      { name: 'Paw Egg',              file: 'PS99 Paw Egg.png',              type: 'egg' },
+      { name: 'Grass Egg',            file: 'PS99 Grass Egg.png',            type: 'egg' },
+      { name: 'Wood Egg',             file: 'PS99 Wood Egg.png',             type: 'egg' },
+      { name: 'Pumpkin Egg',          file: 'PS99 Pumpkin Egg.png',          type: 'egg' },
+      { name: 'Hive Egg',             file: 'PS99 Hive Egg.png',             type: 'egg' },
+      { name: 'Acorn Egg',            file: 'PS99 Acorn Egg.png',            type: 'egg' },
+      { name: 'Blossom Egg',          file: 'PS99 Blossom Egg.png',          type: 'egg' },
+      { name: 'Corgi Egg',            file: 'PS99 Corgi Egg.png',            type: 'egg' },
+      { name: 'Cat Egg',              file: 'PS99 Cat Egg.png',              type: 'egg' },
+      { name: 'Dog Egg',              file: 'PS99 Dog Egg.png',              type: 'egg' },
+      { name: 'Dragon Egg',           file: 'PS99 Dragon Egg.png',           type: 'egg' },
+      { name: 'Rock Egg',             file: 'PS99 Rock Egg.png',             type: 'egg' },
+      { name: 'Geode Egg',            file: 'PS99 Geode Egg.png',            type: 'egg' },
+      { name: 'Hut Egg',              file: 'PS99 Hut Egg.png',              type: 'egg' },
+      { name: 'Grave Egg',            file: 'PS99 Grave Egg.png',            type: 'egg' },
+      { name: 'Jungle Egg',           file: 'PS99 Jungle Egg.png',           type: 'egg' },
+      { name: 'Coconut Egg',          file: 'PS99 Coconut Egg.png',          type: 'egg' },
+      { name: 'Sakura Egg',           file: 'PS99 Sakura Egg.png',           type: 'egg' },
+      { name: 'Ninja Egg',            file: 'PS99 Ninja Egg.png',            type: 'egg' },
+      { name: 'Lantern Egg',          file: 'PS99 Lantern Egg.png',          type: 'egg' },
+      { name: 'Bonsai Egg',           file: 'PS99 Bonsai Egg.png',           type: 'egg' },
+      { name: 'Garden Egg',           file: 'PS99 Garden Egg.png',           type: 'egg' },
+      { name: 'Pixie Egg',            file: 'PS99 Pixie Egg.png',            type: 'egg' },
+      { name: 'Fossil Egg',           file: 'PS99 Fossil Egg.png',           type: 'egg' },
+      { name: 'Melted Egg',           file: 'PS99 Melted Egg.png',           type: 'egg' },
+      { name: 'Soccer Egg 1',         file: 'PS99 Soccer Egg 1.png',         type: 'egg' },
+      { name: 'Soccer Egg 2',         file: 'PS99 Soccer Egg 2.png',         type: 'egg' },
+      { name: 'Soccer Egg 3',         file: 'PS99 Soccer Egg 3.png',         type: 'egg' },
+      { name: 'Colorful Banners Egg',  file: 'PS99 Colorful Banners Egg.png',  type: 'egg' },
+      { name: 'Colorful Graffiti Egg', file: 'PS99 Colorful Graffiti Egg.png', type: 'egg' },
+    ];
+
+    // ----------------------------------------------------------
+    //  REGULAR PETS (sample of popular ones)
+    // ----------------------------------------------------------
+    const regularPets = [
+      { name: 'Dog',              file: 'PS99 Dog.png',              type: 'pet' },
+      { name: 'Cat',              file: 'PS99 Cat.png',              type: 'pet' },
+      { name: 'Corgi',            file: 'PS99 Corgi.png',            type: 'pet' },
+      { name: 'Blue Slime',       file: 'PS99 Blue Slime.png',       type: 'pet' },
+      { name: 'Butterfly',        file: 'PS99 Butterfly.png',        type: 'pet' },
+      { name: 'Classic Dog',      file: 'PS99 Classic Dog.png',      type: 'pet' },
+      { name: 'Mystical Fox',     file: 'PS99 Mystical Fox.png',     type: 'pet' },
+      { name: 'Sloth',            file: 'PS99 Sloth.png',            type: 'pet' },
+      { name: 'Lion',             file: 'PS99 Lion.png',             type: 'pet' },
+      { name: 'Jaguar',           file: 'PS99 Jaguar.png',           type: 'pet' },
+      { name: 'Lemur',            file: 'PS99 Lemur.png',            type: 'pet' },
+      { name: 'Crocodile',        file: 'PS99 Crocodile.png',        type: 'pet' },
+      { name: 'Goat',             file: 'PS99 Goat.png',             type: 'pet' },
+      { name: 'Deer',             file: 'PS99 Deer.png',             type: 'pet' },
+      { name: 'Snow Ram',         file: 'PS99 Snow Ram.png',         type: 'pet' },
+      { name: 'Snow Dog',         file: 'PS99 Snow Dog.png',         type: 'pet' },
+      { name: 'Snow Leopard',     file: 'PS99 Snow Leopard.png',     type: 'pet' },
+      { name: 'Armadillo',        file: 'PS99 Armadillo.png',        type: 'pet' },
+      { name: 'Kangaroo',         file: 'PS99 Kangaroo.png',         type: 'pet' },
+      { name: 'Hyena',            file: 'PS99 Hyena.png',            type: 'pet' },
+      { name: 'Flower Gecko',     file: 'PS99 Flower Gecko.png',     type: 'pet' },
+      { name: 'Shark',            file: 'PS99 Shark.png',            type: 'pet' },
+      { name: 'Ninja Turtle',     file: 'PS99 Ninja Turtle.png',     type: 'pet' },
+      { name: 'Kitsune Fox',      file: 'PS99 Kitsune Fox.png',      type: 'pet' },
+      { name: 'Ancient Dragon',   file: 'PS99 Ancient Dragon.png',   type: 'pet' },
+      { name: 'Lime Rare',        file: 'PS99 Lime Rare.png',        type: 'pet' },
+    ];
+
+    // ----------------------------------------------------------
+    //  COMBINE ALL
+    // ----------------------------------------------------------
+    const allItems = [
+      ...pets,
+      ...eggs,
+      ...regularPets,
+    ];
+
+    // ----------------------------------------------------------
+    //  RENDER
+    // ----------------------------------------------------------
+    const gallery = document.getElementById('gallery');
+    const searchInput = document.getElementById('searchInput');
+    const filterButtons = document.getElementById('filterButtons');
+    const imageCountEl = document.getElementById('imageCount');
+    const petCountEl = document.getElementById('petCount');
+    const eggCountEl = document.getElementById('eggCount');
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function render() {
+      const filtered = allItems.filter(item => {
+        const matchesFilter = currentFilter === 'all' || item.type === currentFilter;
+        const matchesSearch = currentSearch === '' ||
+          item.name.toLowerCase().includes(currentSearch.toLowerCase());
+        return matchesFilter && matchesSearch;
+      });
+
+      // Update stats
+      imageCountEl.textContent = allItems.length;
+      petCountEl.textContent = allItems.filter(i => i.type !== 'egg').length;
+      eggCountEl.textContent = allItems.filter(i => i.type === 'egg').length;
+
+      if (filtered.length === 0) {
+        gallery.innerHTML = `<div class="no-results">😕 No images match your search.<br><span style="font-size:0.9rem; opacity:0.7;">Try a different name or filter.</span></div>`;
         return;
       }
 
-      var username = host.slice(0, host.indexOf(githubIoSuffix));
+      gallery.innerHTML = filtered.map((item, index) => {
+        const imgUrl = wikiImg(item.file);
+        const tagLabel = item.type === 'egg' ? 'Egg' :
+                         item.type === 'huge' ? 'Huge' :
+                         item.type === 'titanic' ? 'Titanic' :
+                         item.type === 'gargantuan' ? 'Gargantuan' : 'Pet';
+        return `
+          <div class="pet-card" style="animation-delay:${Math.min(index * 0.02, 0.6)}s" onclick="openLightbox('${imgUrl.replace(/'/g, "\\'")}', '${item.name.replace(/'/g, "\\'")}')">
+            <img src="${imgUrl}" alt="${item.name}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext x=%2250%22 y=%2255%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22%23555%22%3E%3F%3C/text%3E%3C/svg%3E'">
+            <div class="name">${item.name}</div>
+            <div class="tag">${tagLabel}</div>
+          </div>
+        `;
+      }).join('');
+    }
 
-      var repo = path.split("/").filter(Boolean)[0];
+    // Search
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value.trim();
+      render();
+    });
 
-      if (!username || !repo) {
-        console.warn(
-          "Could not determine username/repo from the URL " +
-          "(" + host + path + ") — links left disabled."
-        );
-        return;
-      }
+    // Filter
+    filterButtons.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('filter-btn')) return;
+      filterButtons.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      e.target.classList.add('active');
+      currentFilter = e.target.dataset.filter;
+      render();
+    });
 
-      var base = "https://github.com/" + username + "/" + repo;
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxName = document.getElementById('lightboxName');
 
-      var links = {
-        "link-download": base + "/archive/refs/heads/main.zip",
-        "link-repo": base,
-        "link-footer-repo": base,
-        "link-footer-readme": base + "/blob/main/README.md",
-        "link-footer-issues": base + "/issues"
-      };
+    function openLightbox(src, name) {
+      lightboxImg.src = src;
+      lightboxName.textContent = name;
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
 
-      for (var id in links) {
-        var el = document.getElementById(id);
-        if (el) {
-          el.href = links[id];
-        }
-      }
-    })();
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Initial render
+    render();
   </script>
-
 </body>
 </html>
